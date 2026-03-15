@@ -1,0 +1,20 @@
+{
+  "articles": [
+    {
+      "id": "1",
+      "title": "欢迎使用 Markdown 编辑器",
+      "content": "# 欢迎使用 Markdown 编辑器\n\n这是一个简单的 Markdown 编辑器，支持实时预览。\n\n## 功能特点\n\n- 实时预览 Markdown 渲染效果\n- 支持常见的 Markdown 语法\n- 自动保存到本地 JSON 文件\n\n## 基本语法\n\n### 标题\n\n```markdown\n# 一级标题\n## 二级标题\n### 三级标题\n```\n\n### 列表\n\n- 无序列表项 1\n- 无序列表项 2\n- 无序列表项 3\n\n### 代码块\n\n```javascript\nfunction hello() {\n  console.log('Hello, World!');\n}\n```\n\n### 引用\n\n> 这是一段引用文本。\n\n### 链接和图片\n\n[访问链接](https://example.com)\n\n---\n\n开始你的写作之旅吧！",
+      "tags": ["Markdown", "教程"],
+      "createdAt": "2026-03-15T08:00:00.000Z",
+      "updatedAt": "2026-03-15T08:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "我的第二篇文章",
+      "content": "# 我的第二篇文章\n\n这里是文章内容...\n\n## 小节\n\n一些有趣的思考。",
+      "tags": ["随笔"],
+      "createdAt": "2026-03-15T10:00:00.000Z",
+      "updatedAt": "2026-03-15T10:00:00.000Z"
+    }
+  ]
+}
