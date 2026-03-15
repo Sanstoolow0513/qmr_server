@@ -1,0 +1,49 @@
+{
+  "posts": [
+    {
+      "slug": "getting-started-with-nextjs",
+      "title": "Next.js 入门指南",
+      "excerpt": "学习如何使用 Next.js 构建现代化的 React 应用程序，包括路由、渲染和数据获取。",
+      "content": "# Next.js 入门指南\n\nNext.js 是一个基于 React 的全栈框架，它提供了许多开箱即用的功能。\n\n## 主要特性\n\n- **文件系统路由**：基于文件的路由系统\n- **服务端渲染**：支持 SSR 和 SSG\n- **API 路由**：内置 API 端点支持\n- **图片优化**：自动图片优化\n\n## 快速开始\n\n```bash\nnpx create-next-app@latest my-app\n```\n\n这就是开始使用 Next.js 的方式！",
+      "tags": ["Next.js", "React", "教程"],
+      "createdAt": "2026-03-10",
+      "readingTime": "5 分钟"
+    },
+    {
+      "slug": "tailwind-css-tips",
+      "title": "Tailwind CSS 实用技巧",
+      "excerpt": "掌握 Tailwind CSS 的高级用法，提升你的 CSS 开发效率。",
+      "content": "# Tailwind CSS 实用技巧\n\nTailwind CSS 是一个实用优先的 CSS 框架。\n\n## 常用技巧\n\n### 1. 响应式设计\n\n```html\n<div class=\"text-sm md:text-base lg:text-lg\">\n  响应式文本\n</div>\n```\n\n### 2. 自定义配置\n\n在 `tailwind.config.js` 中扩展主题。\n\n## 总结\n\nTailwind CSS 让样式开发更高效！",
+      "tags": ["CSS", "Tailwind", "前端"],
+      "createdAt": "2026-03-08",
+      "readingTime": "3 分钟"
+    },
+    {
+      "slug": "react-hooks-guide",
+      "title": "React Hooks 完全指南",
+      "excerpt": "深入理解 useState、useEffect 等核心 Hooks 的工作原理和最佳实践。",
+      "content": "# React Hooks 完全指南\n\nHooks 让你可以在函数组件中使用状态和其他 React 特性。\n\n## useState\n\n```jsx\nconst [count, setCount] = useState(0);\n```\n\n## useEffect\n\n处理副作用：\n\n```jsx\nuseEffect(() => {\n  document.title = `Count: ${count}`;\n}, [count]);\n```\n\n继续学习更多 Hooks！",
+      "tags": ["React", "JavaScript", "Hooks"],
+      "createdAt": "2026-03-05",
+      "readingTime": "8 分钟"
+    },
+    {
+      "slug": "typescript-best-practices",
+      "title": "TypeScript 最佳实践",
+      "excerpt": "编写高质量 TypeScript 代码的实用建议和模式。",
+      "content": "# TypeScript 最佳实践\n\nTypeScript 为 JavaScript 添加了类型系统。\n\n## 类型推断\n\n让 TypeScript 自动推断类型：\n\n```typescript\nconst name = 'Alice'; // 自动推断为 string\n```\n\n## 接口与类型\n\n优先使用接口：\n\n```typescript\ninterface User {\n  name: string;\n  age: number;\n}\n```\n\n享受类型安全的好处！",
+      "tags": ["TypeScript", "JavaScript"],
+      "createdAt": "2026-03-01",
+      "readingTime": "6 分钟"
+    },
+    {
+      "slug": "markdown-writing-tips",
+      "title": "Markdown 写作技巧",
+      "excerpt": "提高 Markdown 写作效率的实用技巧和建议。",
+      "content": "# Markdown 写作技巧\n\nMarkdown 是一种轻量级标记语言。\n\n## 基础语法\n\n### 标题\n\n```markdown\n# 一级标题\n## 二级标题\n### 三级标题\n```\n\n### 列表\n\n- 无序列表项\n- 另一个项\n\n1. 有序列表项\n2. 第二个项\n\n## 高级技巧\n\n使用表格、代码块等增强可读性。\n\n开始写作吧！",
+      "tags": ["Markdown", "写作", "工具"],
+      "createdAt": "2026-02-28",
+      "readingTime": "4 分钟"
+    }
+  ]
+}
