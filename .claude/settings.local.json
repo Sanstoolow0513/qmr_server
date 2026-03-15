@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git check-ignore:*)",
+      "Bash(git worktree:*)",
+      "Bash(cd:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm build:*)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "Bash(ls:*)",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "Bash(pnpm add:*)",
+      "Bash(git:*)"
+    ]
+  }
+}
