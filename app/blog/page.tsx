@@ -1,141 +1,118 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { BookOpen, Clock, Tag, ChevronRight, Edit3 } from 'lucide-react';
-import Link from 'next/link';
-import { Article, formatDateShort, getExcerpt } from '@/lib/markdown';
-
-function formatDate(dateString: string): string {
-  return formatDateShort(dateString);
-}
+import Link from "next/link";
+import { ArrowLeft, BookOpen, Calendar, Clock, Tag } from "lucide-react";
+import { getAllPosts } from "@/lib/posts";
 
 export default function BlogPage() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    loadArticles();
-  }, []);
-
-  const loadArticles = async () => {
-    try {
-      const response = await fetch('/api/articles');
-      const data = await response.json();
-      if (data.articles) {
-        setArticles(data.articles);
-      }
-    } catch (error) {
-      console.error('Failed to load articles:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const posts = getAllPosts();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-200">
-                <BookOpen className="h-5 w-5 text-white" />
-              </div>
-            </Link>
-            <div>
-              <h1 className="text-lg font-bold text-gray-900">我的博客</h1>
-              <p className="text-xs text-gray-500">记录思考与分享</p>
-            </div>
-          </div>
-
+      <header className="px-6 py-6 md:px-12">
+        <div className="mx-auto max-w-4xl">
           <Link
-            href="/editor"
-            className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
           >
-            <Edit3 className="h-4 w-4" />
-            写文章
+            <ArrowLeft className="h-4 w-4" />
+            返回首页
           </Link>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-8">
-        {isLoading ? (
-          <div className="text-center py-12">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-500 border-r-transparent"></div>
-            <p className="mt-4 text-gray-500">加载中... </p>
-          </div>
-        ) : articles.length === 0 ? (
-          <div className="text-center py-16">
-            <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 mb-4">
-              <BookOpen className="h-8 w-8 text-gray-400" />
+      <main className="px-6 pb-16 md:px-12">
+        <div className="mx-auto max-w-4xl">
+          {/* Page Title */}
+          <div className="mb-12 text-center">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-200">
+              <BookOpen className="h-8 w-8 text-white" />
             </div>
-            <h2 className="text-lg font-semibold text-gray-700 mb-2">暂无文章</h2>
-            <p className="text-gray-500 mb-6">开始撰写你的第一篇文章吧</p>
-            <Link
-              href="/editor"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <Edit3 className="h-4 w-4" />
-              去写作
-            </Link>
+            <h1 className="mb-3 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
+              博客文章
+            </h1>
+            <p className="text-gray-600">
+              分享技术心得、学习笔记与开发经验
+            </p>
           </div>
-        ) : (
+
+          {/* Posts List */}
           <div className="space-y-6">
-            {articles.map((article) => (
-              <Link
-                key={article.id}
-                href={`/blog/${article.id}`}
-                className="block group"
+            {posts.map((post) => (
+              <article
+                key={post.slug}
+                className="group relative overflow-hidden rounded-3xl bg-white/80 p-6 shadow-lg shadow-blue-100/50 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-blue-200/50 md:p-8"
               >
-                <article className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-lg hover:shadow-blue-100/50 hover:-translate-y-0.5"
-                >
-                  <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors"
-                  >
-                    {article.title}
+                {/* Left accent border */}
+                <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-indigo-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                <div className="relative">
+                  {/* Tags */}
+                  <div className="mb-3 flex flex-wrap items-center gap-2">
+                    {post.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700"
+                      >
+                        <Tag className="h-3 w-3" />
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Title */}
+                  <h2 className="mb-3 text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600 md:text-2xl">
+                    <Link href={`/blog/${post.slug}`} className="block">
+                      {post.title}
+                    </Link>
                   </h2>
 
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                    {getExcerpt(article.content)}
+                  {/* Excerpt */}
+                  <p className="mb-4 text-sm leading-relaxed text-gray-600 md:text-base">
+                    {post.excerpt}
                   </p>
 
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1.5 text-sm text-gray-500">
-                        <Clock className="h-4 w-4" />
-                        <time dateTime={article.createdAt}>
-                          {formatDate(article.createdAt)}
-                        </time>
-                      </div>
-
-                      {article.tags.length > 0 && (
-                        <div className="flex items-center gap-2">
-                          <Tag className="h-4 w-4 text-gray-400" />
-                          <div className="flex gap-1">
-                            {article.tags.slice(0, 3).map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-2 py-0.5 text-xs bg-blue-50 text-blue-600 rounded-full"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-1 text-blue-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      阅读全文
-                      <ChevronRight className="h-4 w-4" />
-                    </div>
+                  {/* Meta info */}
+                  <div className="flex items-center gap-4 text-xs text-gray-500 md:text-sm">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Calendar className="h-3.5 w-3.5" />
+                      {post.createdAt}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Clock className="h-3.5 w-3.5" />
+                      {post.readingTime}
+                    </span>
                   </div>
-                </article>
-              </Link>
+                </div>
+
+                {/* Hover arrow */}
+                <div className="absolute bottom-6 right-6 opacity-0 transition-all duration-300 group-hover:opacity-100 md:bottom-8 md:right-8">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
+                    <svg
+                      className="h-5 w-5 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
-        )}
+
+          {/* Footer info */}
+          <div className="mt-12 text-center">
+            <p className="text-sm text-gray-500">
+              共 {posts.length} 篇文章
+            </p>
+          </div>
+        </div>
       </main>
     </div>
   );

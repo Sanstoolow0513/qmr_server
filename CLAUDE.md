@@ -4,15 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Next.js 16 blog application with an integrated Markdown editor. It uses a file-based JSON storage system for articles instead of a database.
+This is a Next.js 16 project with React 19, TypeScript, and Tailwind CSS v4. It's a Chinese-language blog/writing space application with plans for Markdown editing, article management, and todo list features.
 
-## Common Commands
+## Package Manager
+
+This project uses **pnpm**. Do not use npm or yarn.
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Start development server (runs on http://localhost:3000)
+# Run development server
 pnpm dev
 
 # Build for production
@@ -25,51 +27,94 @@ pnpm start
 pnpm lint
 ```
 
-## Architecture
+## Development Server
 
-### Tech Stack
-- **Framework**: Next.js 16 with App Router
-- **React**: Version 19.2.3
-- **TypeScript**: Version 5 with strict mode enabled
-- **Styling**: Tailwind CSS 4 with PostCSS
+The development server runs on [http://localhost:3000](http://localhost:3000).
+
+```bash
+pnpm dev
+```
+
+## Tech Stack
+
+- **Framework**: Next.js 16.1.6 (App Router)
+- **React**: 19.2.3
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS v4 with PostCSS
 - **Icons**: lucide-react
-- **Package Manager**: pnpm (monorepo workspace configured)
+- **Font**: Geist (via next/font/google)
 
-### Data Storage
-Articles are stored in `data/articles.json` as a flat JSON file. The `lib/articles.ts` module provides CRUD operations:
-- `getAllArticles()` - Returns articles sorted by `updatedAt` (newest first)
-- `getArticleById(id)` - Fetches a single article
-- `createArticle(title, content, tags)` - Creates with auto-generated UUID
-- `updateArticle(id, updates)` - Partial updates with automatic `updatedAt` timestamp
-- `deleteArticle(id)` - Removes article from storage
+## Tailwind CSS v4 Configuration
 
-### Markdown Processing
-Custom Markdown parser in `lib/markdown.ts` (`parseMarkdown` function):
-- Converts Markdown to HTML with Tailwind CSS classes
-- Supports: headers, code blocks, inline code, bold/italic, links, images, blockquotes, lists, horizontal rules
-- Includes XSS protection via `escapeHtml`
-- Helper functions: `formatDate`, `formatDateShort`, `getExcerpt`
+This project uses Tailwind CSS v4 which has a new configuration syntax:
 
-### API Routes
-- `GET /api/articles` - List all articles
-- `POST /api/articles` - Create article (validates: title ≤200 chars, content ≤50000 chars, max 10 tags)
-- `GET /api/articles/[id]` - Get single article
-- `PUT /api/articles/[id]` - Update article
-- `DELETE /api/articles/[id]` - Delete article
+- Main styles are in `app/globals.css`
+- Uses `@import "tailwindcss"` instead of directives
+- Theme customization uses `@theme inline` block
+- CSS variables defined in `:root` for theming
 
-### Page Routes
-- `/` - Home page with navigation cards and todo list
-- `/blog` - Article listing page
-- `/blog/[id]` - Individual article view
-- `/editor` - Markdown editor with split-pane preview
+Example from `globals.css`:
+```css
+@import "tailwindcss";
 
-### Client Components
-Pages using client-side interactivity (`'use client'`):
-- `app/editor/page.tsx` - Article editor with sidebar article list
-- `app/blog/page.tsx` - Article listing with loading states
-- `app/blog/[id]/page.tsx` - Article view with dynamic loading
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
 
-### Key Files
-- `lib/articles.ts` - Data access layer for JSON file operations
-- `lib/markdown.ts` - Markdown parsing and formatting utilities
-- `data/articles.json` - Article storage (auto-created if missing)
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+```
+
+## Project Structure
+
+```
+app/
+├── layout.tsx      # Root layout with Geist font configuration
+├── page.tsx        # Home page with blog/editor/todo links
+├── globals.css     # Tailwind CSS v4 styles
+└── favicon.ico     # Site favicon
+
+public/             # Static assets
+next.config.ts      # Next.js configuration (TypeScript)
+eslint.config.mjs   # ESLint configuration using flat config format
+postcss.config.mjs  # PostCSS configuration for Tailwind v4
+tsconfig.json       # TypeScript configuration with path aliases
+```
+
+## Path Aliases
+
+The project uses `@/*` as a path alias pointing to the root directory:
+
+```typescript
+import { something } from "@/lib/utils";  // Resolves to ./lib/utils
+```
+
+## ESLint Configuration
+
+The project uses the new ESLint flat config format (`eslint.config.mjs`) with:
+- `eslint-config-next/core-web-vitals`
+- `eslint-config-next/typescript`
+
+Run linting with `pnpm lint`.
+
+## Planned Features
+
+Based on the current page content and todo list, planned features include:
+- Markdown editor with syntax highlighting and preview
+- Article metadata (title, tags, creation time)
+- Article list page with pagination, search, and filtering
+- Code block copy functionality
+- Comment system integration
+- SEO optimization and RSS feed
+- Todo list for task management
+
+## Important Notes
+
+- The UI is primarily in Chinese (Simplified)
+- Uses Tailwind CSS v4's new `@theme inline` syntax for custom theme properties
+- The project uses React 19 which may have different behavior from React 18 for certain APIs
