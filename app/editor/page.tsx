@@ -27,6 +27,7 @@ import { useMarkdownShortcuts } from '@/hooks/useMarkdownShortcuts';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useToast } from '@/hooks/useToast';
 import EditorToolbar from '@/components/EditorToolbar';
+import { ThemeToggle } from '@/components/theme';
 
 export default function EditorPage() {
   // Core state
@@ -377,13 +378,13 @@ export default function EditorPage() {
   const titleWarning = title.length > titleLimit * 0.9;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--background)]">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+      <header className="bg-[var(--theme-surface)] border-b border-[var(--theme-border)] px-4 py-3 flex items-center justify-between sticky top-0 z-10">
         <div className="flex items-center gap-4">
           <Link
             href="/"
-            className="text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-[var(--theme-text-secondary)] hover:text-[var(--theme-text-primary)] transition-colors"
           >
             <ChevronLeft className="h-5 w-5" />
           </Link>
@@ -402,7 +403,7 @@ export default function EditorPage() {
               onClick={handleUndo}
               disabled={!canUndo}
               title="撤销 (Ctrl+Z)"
-              className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
+              className="p-2 text-[var(--theme-text-secondary)] hover:bg-[var(--theme-surface-hover)] rounded-lg disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
             >
               <RotateCcw className="h-4 w-4" />
             </button>
@@ -410,7 +411,7 @@ export default function EditorPage() {
               onClick={handleRedo}
               disabled={!canRedo}
               title="重做 (Ctrl+Y)"
-              className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
+              className="p-2 text-[var(--theme-text-secondary)] hover:bg-[var(--theme-surface-hover)] rounded-lg disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
             >
               <RotateCw className="h-4 w-4" />
             </button>
@@ -418,7 +419,7 @@ export default function EditorPage() {
 
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-3 py-1.5 text-sm text-[var(--theme-text-secondary)] hover:bg-[var(--theme-surface-hover)] rounded-lg transition-colors"
           >
             {showPreview ? (
               <>
@@ -432,6 +433,9 @@ export default function EditorPage() {
               </>
             )}
           </button>
+
+          <ThemeToggle variant="icon" size="sm" />
+
           <button
             onClick={saveArticle}
             disabled={isLoading}
@@ -445,11 +449,11 @@ export default function EditorPage() {
 
       <div className="flex h-[calc(100vh-60px)]">
         {/* Sidebar - Article List */}
-        <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
-          <div className="p-4 border-b border-gray-200">
+        <aside className="w-64 bg-[var(--theme-surface)] border-r border-[var(--theme-border)] flex flex-col">
+          <div className="p-4 border-b border-[var(--theme-border)]">
             <button
               onClick={createNewArticle}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--theme-text-primary)] text-[var(--theme-surface)] text-sm font-medium rounded-lg hover:opacity-90 transition-colors"
             >
               <Plus className="h-4 w-4" />
               新建文章
@@ -461,10 +465,10 @@ export default function EditorPage() {
               <button
                 key={article.id}
                 onClick={() => selectArticle(article)}
-                className={`w-full text-left p-4 border-b border-gray-100 transition-colors ${
+                className={`w-full text-left p-4 border-b border-[var(--theme-border-subtle)] transition-colors ${
                   selectedId === article.id
-                    ? 'bg-emerald-50 border-l-4 border-l-emerald-500'
-                    : 'hover:bg-gray-50 border-l-4 border-l-transparent'
+                    ? 'bg-emerald-50 dark:bg-emerald-900/20 border-l-4 border-l-emerald-500'
+                    : 'hover:bg-[var(--theme-surface-hover)] border-l-4 border-l-transparent'
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -472,7 +476,7 @@ export default function EditorPage() {
                     className={`h-4 w-4 mt-0.5 flex-shrink-0 ${
                       selectedId === article.id
                         ? 'text-emerald-600'
-                        : 'text-gray-400'
+                        : 'text-[var(--theme-text-tertiary)]'
                     }`}
                   />
                   <div className="min-w-0">
@@ -480,12 +484,12 @@ export default function EditorPage() {
                       className={`text-sm font-medium truncate ${
                         selectedId === article.id
                           ? 'text-emerald-900'
-                          : 'text-gray-900'
+                          : 'text-[var(--theme-text-primary)]'
                       }`}
                     >
                       {article.title}
                     </h4>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-[var(--theme-text-tertiary)] mt-1">
                       {formatDate(article.updatedAt)}
                     </p>
                     {article.tags.length > 0 && (
@@ -493,13 +497,13 @@ export default function EditorPage() {
                         {article.tags.slice(0, 2).map((tag) => (
                           <span
                             key={tag}
-                            className="px-1.5 py-0.5 text-xs bg-gray-100 text-gray-600 rounded"
+                            className="px-1.5 py-0.5 text-xs bg-[var(--theme-surface-hover)] text-[var(--theme-text-secondary)] rounded"
                           >
                             {tag}
                           </span>
                         ))}
                         {article.tags.length > 2 && (
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs +{article.tags.length - 2}">
                             +{article.tags.length - 2}
                           </span>
                         )}
@@ -525,7 +529,7 @@ export default function EditorPage() {
               } flex flex-col bg-white transition-all duration-200`}
             >
               {/* Title Input */}
-              <div className="p-4 border-b border-gray-200">
+              <div className="p-4 border-b border-[var(--theme-border)]">
                 <input
                   type="text"
                   value={title}
@@ -536,7 +540,7 @@ export default function EditorPage() {
                 />
                 <div className="flex items-center gap-4 mt-3">
                   <div className="flex items-center gap-2 flex-1">
-                    <Tag className="h-4 w-4 text-gray-400" />
+                    <Tag className="h-4 w-4 +{article.tags.length - 2}" />
                     <input
                       type="text"
                       value={tags}
@@ -554,7 +558,7 @@ export default function EditorPage() {
                   {selectedId && (
                     <button
                       onClick={deleteCurrentArticle}
-                      className="text-gray-400 hover:text-red-500 transition-colors"
+                      className="+{article.tags.length - 2} hover:text-red-500 transition-colors"
                       title="删除文章"
                     >
                       <Trash2 className="h-4 w-4" />

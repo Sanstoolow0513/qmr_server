@@ -15,13 +15,13 @@ interface TodoItemProps {
 function getPriorityColor(priority: Priority): string {
   switch (priority) {
     case "high":
-      return "bg-rose-100 text-rose-700 border-rose-200";
+      return "bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800";
     case "medium":
-      return "bg-amber-100 text-amber-700 border-amber-200";
+      return "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800";
     case "low":
-      return "bg-blue-100 text-blue-700 border-blue-200";
+      return "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800";
     default:
-      return "bg-gray-100 text-gray-700 border-gray-200";
+      return "bg-[var(--theme-surface-hover)] text-[var(--theme-text-secondary)] border-[var(--theme-border)]";
   }
 }
 
@@ -69,10 +69,10 @@ export default function TodoItem({
 
   if (isEditing) {
     return (
-      <div className="rounded-2xl border-2 border-emerald-300 bg-white p-5 shadow-lg">
+      <div className="rounded-2xl border-2 border-emerald-300 bg-[var(--theme-surface)] p-5 shadow-lg">
         <div className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className="mb-1 block text-sm font-medium text-[var(--theme-text-primary)]">
               标题
             </label>
             <input
@@ -81,12 +81,12 @@ export default function TodoItem({
               onChange={(e) =>
                 setEditForm({ ...editForm, title: e.target.value })
               }
-              className="w-full rounded-xl border border-gray-200 px-4 py-2 text-gray-900 transition-colors focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+              className="w-full rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface)] px-4 py-2 text-[var(--theme-text-primary)] transition-colors focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100 dark:focus:ring-emerald-900/30"
               placeholder="输入标题"
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className="mb-1 block text-sm font-medium text-[var(--theme-text-primary)]">
               描述
             </label>
             <textarea
@@ -95,13 +95,13 @@ export default function TodoItem({
                 setEditForm({ ...editForm, description: e.target.value })
               }
               rows={3}
-              className="w-full resize-none rounded-xl border border-gray-200 px-4 py-2 text-gray-900 transition-colors focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+              className="w-full resize-none rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface)] px-4 py-2 text-[var(--theme-text-primary)] transition-colors focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100 dark:focus:ring-emerald-900/30"
               placeholder="输入描述"
             />
           </div>
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="mb-1 block text-sm font-medium text-gray-700">
+              <label className="mb-1 block text-sm font-medium text-[var(--theme-text-primary)]">
                 优先级
               </label>
               <select
@@ -112,7 +112,7 @@ export default function TodoItem({
                     priority: e.target.value as Priority,
                   })
                 }
-                className="w-full rounded-xl border border-gray-200 px-4 py-2 text-gray-900 transition-colors focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                className="w-full rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface)] px-4 py-2 text-[var(--theme-text-primary)] transition-colors focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100 dark:focus:ring-emerald-900/30"
               >
                 <option value="high">高优先级</option>
                 <option value="medium">中优先级</option>
@@ -120,7 +120,7 @@ export default function TodoItem({
               </select>
             </div>
             <div className="flex-1">
-              <label className="mb-1 block text-sm font-medium text-gray-700">
+              <label className="mb-1 block text-sm font-medium text-[var(--theme-text-primary)]">
                 分类
               </label>
               <input
@@ -129,7 +129,7 @@ export default function TodoItem({
                 onChange={(e) =>
                   setEditForm({ ...editForm, category: e.target.value })
                 }
-                className="w-full rounded-xl border border-gray-200 px-4 py-2 text-gray-900 transition-colors focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                className="w-full rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface)] px-4 py-2 text-[var(--theme-text-primary)] transition-colors focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100 dark:focus:ring-emerald-900/30"
                 placeholder="输入分类"
               />
             </div>
@@ -137,7 +137,7 @@ export default function TodoItem({
           <div className="flex justify-end gap-2">
             <button
               onClick={handleCancel}
-              className="flex items-center gap-1 rounded-xl bg-gray-100 px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+              className="flex items-center gap-1 rounded-xl bg-[var(--theme-surface-hover)] px-4 py-2 text-sm font-medium text-[var(--theme-text-secondary)] transition-colors hover:bg-[var(--theme-border)]"
             >
               <X className="h-4 w-4" />
               取消
@@ -157,8 +157,8 @@ export default function TodoItem({
 
   return (
     <div
-      className={`group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 hover:border-emerald-200 hover:shadow-lg ${
-        todo.done ? "bg-gray-50/80" : ""
+      className={`group rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 shadow-sm transition-all duration-300 hover:border-emerald-200 dark:hover:border-emerald-800 hover:shadow-lg ${
+        todo.done ? "bg-[var(--theme-surface-hover)]/80" : ""
       } ${isPending ? "opacity-60" : ""}`}
     >
       <div className="flex items-start gap-4">
@@ -168,7 +168,7 @@ export default function TodoItem({
           className={`mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
             todo.done
               ? "border-emerald-500 bg-emerald-500"
-              : "border-gray-300 group-hover:border-emerald-400"
+              : "border-[var(--theme-border)] group-hover:border-emerald-400"
           }`}
         >
           {todo.done && (
@@ -190,7 +190,7 @@ export default function TodoItem({
         <div className="flex-1">
           <div className="mb-2 flex flex-wrap items-center gap-2">
             <h3
-              className={`font-semibold ${todo.done ? "text-gray-400 line-through" : "text-gray-900"}`}
+              className={`font-semibold ${todo.done ? "text-[var(--theme-text-tertiary)] line-through" : "text-[var(--theme-text-primary)]"}`}
             >
               {todo.title}
             </h3>
@@ -201,12 +201,12 @@ export default function TodoItem({
             </span>
           </div>
           <p
-            className={`mb-3 text-sm ${todo.done ? "text-gray-400 line-through" : "text-gray-600"}`}
+            className={`mb-3 text-sm ${todo.done ? "text-[var(--theme-text-tertiary)] line-through" : "text-[var(--theme-text-secondary)]"}`}
           >
             {todo.description}
           </p>
           <div
-            className={`flex flex-wrap items-center gap-4 text-xs ${todo.done ? "text-gray-400" : "text-gray-500"}`}
+            className={`flex flex-wrap items-center gap-4 text-xs ${todo.done ? "text-[var(--theme-text-tertiary)]" : "text-[var(--theme-text-secondary)]"}`}
           >
             <span className="flex items-center gap-1">
               <Tag className="h-3.5 w-3.5" />
@@ -222,7 +222,7 @@ export default function TodoItem({
           <button
             onClick={() => setIsEditing(true)}
             disabled={isPending}
-            className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+            className="rounded-lg p-2 text-[var(--theme-text-tertiary)] transition-colors hover:bg-[var(--theme-surface-hover)] hover:text-[var(--theme-text-secondary)]"
             title="编辑"
           >
             <Pencil className="h-4 w-4" />
@@ -230,7 +230,7 @@ export default function TodoItem({
           <button
             onClick={onDelete}
             disabled={isPending}
-            className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-rose-50 hover:text-rose-500"
+            className="rounded-lg p-2 text-[var(--theme-text-tertiary)] transition-colors hover:bg-rose-50 dark:hover:bg-rose-900/20 hover:text-rose-500"
             title="删除"
           >
             <Trash2 className="h-4 w-4" />

@@ -51,17 +51,17 @@ export default function TodoList({ initialTodos }: TodoListProps) {
   return (
     <>
       {/* Progress Card */}
-      <section className="mb-8 rounded-3xl bg-white/80 p-6 shadow-xl shadow-orange-100/50 backdrop-blur-sm">
+      <section className="mb-8 rounded-3xl bg-[var(--theme-surface)]/80 p-6 shadow-xl shadow-stone-100/50 dark:shadow-stone-900/30 backdrop-blur-sm border border-[var(--theme-border)]">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold text-gray-900">整体进度</h2>
-            <p className="text-sm text-gray-500">
+            <h2 className="text-lg font-bold text-[var(--theme-text-primary)]">整体进度</h2>
+            <p className="text-sm text-[var(--theme-text-tertiary)]">
               已完成 {completedTodos.length} / {optimisticTodos.length} 项任务
             </p>
           </div>
           <span className="text-3xl font-bold text-emerald-600">{progress}%</span>
         </div>
-        <div className="mt-4 h-3 w-full overflow-hidden rounded-full bg-gray-100">
+        <div className="mt-4 h-3 w-full overflow-hidden rounded-full bg-[var(--theme-surface-hover)]">
           <div
             className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 transition-all duration-500"
             style={{ width: `${progress}%` }}
@@ -71,8 +71,8 @@ export default function TodoList({ initialTodos }: TodoListProps) {
 
       {/* Pending Todos */}
       <section className="mb-8">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-gray-900">
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-700">
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-[var(--theme-text-primary)]">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30 text-xs font-bold text-amber-700 dark:text-amber-300">
             {pendingTodos.length}
           </span>
           待完成
@@ -88,9 +88,9 @@ export default function TodoList({ initialTodos }: TodoListProps) {
             />
           ))}
           {pendingTodos.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-gray-200 bg-white/50 p-8 text-center">
+            <div className="rounded-2xl border border-dashed border-[var(--theme-border)] bg-[var(--theme-surface)]/50 p-8 text-center">
               <Sparkles className="mx-auto mb-3 h-10 w-10 text-amber-400" />
-              <p className="text-gray-500">暂无待办事项</p>
+              <p className="text-[var(--theme-text-tertiary)]">暂无待办事项</p>
             </div>
           )}
         </div>
@@ -98,8 +98,8 @@ export default function TodoList({ initialTodos }: TodoListProps) {
 
       {/* Completed Todos */}
       <section>
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-gray-900">
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-[var(--theme-text-primary)]">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-xs font-bold text-emerald-700 dark:text-emerald-300">
             {completedTodos.length}
           </span>
           已完成
@@ -115,9 +115,9 @@ export default function TodoList({ initialTodos }: TodoListProps) {
             />
           ))}
           {completedTodos.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-gray-200 bg-white/50 p-8 text-center">
-              <CheckSquare className="mx-auto mb-3 h-10 w-10 text-gray-300" />
-              <p className="text-gray-500">还没有完成的任务</p>
+            <div className="rounded-2xl border border-dashed border-[var(--theme-border)] bg-[var(--theme-surface)]/50 p-8 text-center">
+              <CheckSquare className="mx-auto mb-3 h-10 w-10 text-[var(--theme-text-tertiary)]" />
+              <p className="text-[var(--theme-text-tertiary)]">还没有完成的任务</p>
             </div>
           )}
         </div>
