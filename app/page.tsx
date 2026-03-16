@@ -1,5 +1,6 @@
 import { FileText, ListTodo, PenTool, Sparkles, BookOpen, Edit3, CheckSquare } from "lucide-react";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/theme";
 
 export default function Home() {
   const todoItems = [
@@ -35,16 +36,19 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
+    <div className="min-h-screen theme-gradient">
       {/* Header */}
       <header className="px-6 py-8 md:px-12">
-        <div className="mx-auto max-w-6xl flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 shadow-lg shadow-orange-200">
-            <Sparkles className="h-5 w-5 text-white" />
+        <div className="mx-auto max-w-6xl flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 shadow-lg shadow-orange-200 dark:shadow-orange-900/30">
+              <Sparkles className="h-5 w-5 text-white" />
+            </div>
+            <span className="text-xl font-bold tracking-tight text-[var(--theme-text-primary)]">
+              MyBlog
+            </span>
           </div>
-          <span className="text-xl font-bold tracking-tight text-gray-900">
-            MyBlog
-          </span>
+          <ThemeToggle variant="button" size="md" />
         </div>
       </header>
 
@@ -52,10 +56,10 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           {/* Hero Section */}
           <section className="mb-16 text-center">
-            <h1 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+            <h1 className="mb-4 text-4xl font-bold tracking-tight text-[var(--theme-text-primary)] md:text-5xl lg:text-6xl">
               写作空间
             </h1>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600">
+            <p className="mx-auto max-w-2xl text-lg text-[var(--theme-text-secondary)]">
               记录想法、分享知识、构建个人知识库
             </p>
           </section>
@@ -65,7 +69,7 @@ export default function Home() {
             <div className="grid gap-6 md:grid-cols-3">
               {/* Blog 入口 */}
               <Link href="/blog" className="group">
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500 to-indigo-600 p-8 text-white shadow-lg shadow-blue-200 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-300">
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500 to-indigo-600 p-8 text-white shadow-lg shadow-blue-200 dark:shadow-blue-900/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-300 dark:hover:shadow-blue-900/50">
                   <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-white/10 transition-transform duration-300 group-hover:scale-150" />
                   <div className="relative">
                     <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
@@ -79,7 +83,7 @@ export default function Home() {
 
               {/* Markdown 编辑器入口 */}
               <Link href="/editor" className="group">
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 p-8 text-white shadow-lg shadow-emerald-200 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-emerald-300">
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 p-8 text-white shadow-lg shadow-emerald-200 dark:shadow-emerald-900/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-emerald-300 dark:hover:shadow-emerald-900/50">
                   <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-white/10 transition-transform duration-300 group-hover:scale-150" />
                   <div className="relative">
                     <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
@@ -93,7 +97,7 @@ export default function Home() {
 
               {/* Todo List 入口 */}
               <Link href="/todo" className="group">
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 to-rose-600 p-8 text-white shadow-lg shadow-orange-200 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-300">
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 to-rose-600 p-8 text-white shadow-lg shadow-orange-200 dark:shadow-orange-900/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-300 dark:hover:shadow-orange-900/50">
                   <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-white/10 transition-transform duration-300 group-hover:scale-150" />
                   <div className="relative">
                     <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
@@ -109,16 +113,16 @@ export default function Home() {
 
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Left: Markdown 编辑思路 */}
-            <section className="rounded-3xl bg-white/80 p-8 shadow-xl shadow-orange-100/50 backdrop-blur-sm">
+            <section className="rounded-3xl bg-[var(--theme-surface)]/80 p-8 shadow-xl shadow-stone-100/50 dark:shadow-stone-900/30 backdrop-blur-sm border border-[var(--theme-border)]">
               <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-500 shadow-lg shadow-blue-200">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-500 shadow-lg shadow-blue-200 dark:shadow-blue-900/30">
                   <PenTool className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">
+                  <h2 className="text-xl font-bold text-[var(--theme-text-primary)]">
                     Markdown 编辑思路
                   </h2>
-                  <p className="text-sm text-gray-500">高效写作工作流</p>
+                  <p className="text-sm text-[var(--theme-text-tertiary)]">高效写作工作流</p>
                 </div>
               </div>
 
@@ -126,13 +130,13 @@ export default function Home() {
                 {workflowSteps.map((step, index) => (
                   <div
                     key={index}
-                    className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 transition-all duration-300 hover:border-orange-200 hover:shadow-lg hover:shadow-orange-100"
+                    className="group relative overflow-hidden rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 transition-all duration-300 hover:border-[var(--theme-primary)]/30 hover:shadow-lg hover:shadow-stone-100/50 dark:hover:shadow-stone-900/30"
                   >
-                    <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-orange-400 to-rose-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                    <h3 className="mb-1 font-semibold text-gray-900">
+                    <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[var(--theme-primary-light)] to-[var(--theme-primary)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <h3 className="mb-1 font-semibold text-[var(--theme-text-primary)]">
                       {step.title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-gray-600">
+                    <p className="text-sm leading-relaxed text-[var(--theme-text-secondary)]">
                       {step.desc}
                     </p>
                   </div>
@@ -140,14 +144,14 @@ export default function Home() {
               </div>
 
               {/* Tips */}
-              <div className="mt-6 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 p-5">
+              <div className="mt-6 rounded-2xl bg-gradient-to-r from-[var(--theme-gradient-from)] to-[var(--theme-gradient-via)] p-5">
                 <div className="flex items-start gap-3">
-                  <FileText className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-500" />
+                  <FileText className="mt-0.5 h-5 w-5 flex-shrink-0 text-[var(--theme-primary)]" />
                   <div>
-                    <h4 className="mb-1 font-semibold text-gray-900">
+                    <h4 className="mb-1 font-semibold text-[var(--theme-text-primary)]">
                       写作小贴士
                     </h4>
-                    <ul className="space-y-1.5 text-sm text-gray-600">
+                    <ul className="space-y-1.5 text-sm text-[var(--theme-text-secondary)]">
                       <li>• 使用 ## 和 ### 保持标题层级清晰</li>
                       <li>• 代码块标注语言类型获得语法高亮</li>
                       <li>• 适当使用引用块和分隔线增强可读性</li>
@@ -159,16 +163,16 @@ export default function Home() {
             </section>
 
             {/* Right: Todo List */}
-            <section className="rounded-3xl bg-white/80 p-8 shadow-xl shadow-orange-100/50 backdrop-blur-sm">
+            <section className="rounded-3xl bg-[var(--theme-surface)]/80 p-8 shadow-xl shadow-stone-100/50 dark:shadow-stone-900/30 backdrop-blur-sm border border-[var(--theme-border)]">
               <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 shadow-lg shadow-emerald-200">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 shadow-lg shadow-emerald-200 dark:shadow-emerald-900/30">
                   <ListTodo className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">
+                  <h2 className="text-xl font-bold text-[var(--theme-text-primary)]">
                     开发待办清单
                   </h2>
-                  <p className="text-sm text-gray-500">Blog 功能开发进度</p>
+                  <p className="text-sm text-[var(--theme-text-tertiary)]">Blog 功能开发进度</p>
                 </div>
               </div>
 
@@ -176,13 +180,13 @@ export default function Home() {
                 {todoItems.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-start gap-4 rounded-2xl border border-gray-100 bg-white p-4 transition-all duration-200 hover:border-emerald-200 hover:shadow-md"
+                    className="flex items-start gap-4 rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface)] p-4 transition-all duration-200 hover:border-emerald-200 dark:hover:border-emerald-800 hover:shadow-md"
                   >
                     <div
                       className={`mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all duration-200 ${
                         item.done
                           ? "border-emerald-500 bg-emerald-500"
-                          : "border-gray-300 hover:border-emerald-400"
+                          : "border-[var(--theme-border)] hover:border-emerald-400"
                       }`}
                     >
                       {item.done && (
@@ -204,8 +208,8 @@ export default function Home() {
                     <span
                       className={`text-sm leading-relaxed transition-all duration-200 ${
                         item.done
-                          ? "text-gray-400 line-through"
-                          : "text-gray-700"
+                          ? "text-[var(--theme-text-tertiary)] line-through"
+                          : "text-[var(--theme-text-secondary)]"
                       }`}
                     >
                       {item.text}
@@ -217,17 +221,16 @@ export default function Home() {
               {/* Progress */}
               <div className="mt-8">
                 <div className="mb-2 flex items-center justify-between text-sm">
-                  <span className="font-medium text-gray-700">整体进度</span>
+                  <span className="font-medium text-[var(--theme-text-primary)]">整体进度</span>
                   <span className="font-semibold text-emerald-600">
                     {Math.round(
                       (todoItems.filter((i) => i.done).length /
                         todoItems.length) *
                         100
-                    )}
-                    %
+                    )}%
                   </span>
                 </div>
-                <div className="h-2.5 w-full overflow-hidden rounded-full bg-gray-100">
+                <div className="h-2.5 w-full overflow-hidden rounded-full bg-[var(--theme-surface-hover)]">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 transition-all duration-500"
                     style={{
@@ -239,7 +242,7 @@ export default function Home() {
                     }}
                   />
                 </div>
-                <p className="mt-3 text-xs text-gray-500">
+                <p className="mt-3 text-xs text-[var(--theme-text-tertiary)]">
                   已完成 {todoItems.filter((i) => i.done).length} /{" "}
                   {todoItems.length} 项任务
                 </p>
@@ -249,7 +252,7 @@ export default function Home() {
 
           {/* Footer CTA */}
           <div className="mt-12 text-center">
-            <button className="group inline-flex items-center gap-2 rounded-full bg-gray-900 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-gray-200 transition-all duration-300 hover:bg-gray-800 hover:shadow-xl hover:shadow-gray-300">
+            <button className="group inline-flex items-center gap-2 rounded-full bg-[var(--theme-text-primary)] px-8 py-4 text-sm font-semibold text-[var(--theme-surface)] shadow-lg shadow-stone-200 dark:shadow-stone-900/50 transition-all duration-300 hover:opacity-90 hover:shadow-xl">
               开始写作
               <svg
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"

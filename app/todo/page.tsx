@@ -1,10 +1,11 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ListTodo } from "lucide-react";
 import Link from "next/link";
 import { promises as fs } from "fs";
 import path from "path";
 import { TodoData } from "./types";
 import AddTodoForm from "./components/AddTodoForm";
 import TodoList from "./components/TodoList";
+import { ThemeToggle } from "@/components/theme";
 
 async function getTodos(): Promise<TodoData> {
   try {
@@ -21,17 +22,18 @@ export default async function TodoPage() {
   const { todos } = await getTodos();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
+    <div className="min-h-screen theme-gradient">
       {/* Header */}
       <header className="px-6 py-6 md:px-12">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-4xl flex items-center justify-between">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900"
+            className="inline-flex items-center gap-2 text-sm text-[var(--theme-text-secondary)] transition-colors hover:text-[var(--theme-text-primary)]"
           >
             <ArrowLeft className="h-4 w-4" />
             返回首页
           </Link>
+          <ThemeToggle variant="icon" size="md" />
         </div>
       </header>
 
@@ -39,10 +41,13 @@ export default async function TodoPage() {
         <div className="mx-auto max-w-4xl">
           {/* Page Header */}
           <section className="mb-10 text-center">
-            <h1 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-rose-600 shadow-lg shadow-orange-200 dark:shadow-orange-900/30">
+              <ListTodo className="h-8 w-8 text-white" />
+            </div>
+            <h1 className="mb-2 text-3xl font-bold tracking-tight text-[var(--theme-text-primary)] md:text-4xl">
               待办清单
             </h1>
-            <p className="text-gray-600">追踪开发任务进度</p>
+            <p className="text-[var(--theme-text-secondary)]">追踪开发任务进度</p>
           </section>
 
           {/* Add Todo Form */}
