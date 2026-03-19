@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props) {
   }
 
   return {
-    title: `${post.title} | MyBlog`,
+    title: post.title,
     description: post.excerpt,
   };
 }

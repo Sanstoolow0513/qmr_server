@@ -1,10 +1,16 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { promises as fs } from "fs";
 import path from "path";
 import { TodoData } from "./types";
 import AddTodoForm from "./components/AddTodoForm";
 import TodoList from "./components/TodoList";
+
+export const metadata: Metadata = {
+  title: "待办清单",
+  description: "追踪 Blog 功能开发进度与任务状态。",
+};
 
 async function getTodos(): Promise<TodoData> {
   try {

@@ -1,5 +1,11 @@
 import { FileText, ListTodo, PenTool, Sparkles, BookOpen, Edit3, CheckSquare } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "写作空间",
+  description: "MyBlog 首页，聚合博客、Markdown 编辑器和待办清单入口。",
+};
 
 export default function Home() {
   const todoItems = [
@@ -249,7 +255,10 @@ export default function Home() {
 
           {/* Footer CTA */}
           <div className="mt-12 text-center">
-            <button className="group inline-flex items-center gap-2 rounded-full bg-gray-900 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-gray-200 transition-all duration-300 hover:bg-gray-800 hover:shadow-xl hover:shadow-gray-300">
+            <Link
+              href="/editor"
+              className="group inline-flex items-center gap-2 rounded-full bg-gray-900 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-gray-200 transition-all duration-300 hover:bg-gray-800 hover:shadow-xl hover:shadow-gray-300"
+            >
               开始写作
               <svg
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
@@ -264,7 +273,7 @@ export default function Home() {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </button>
+            </Link>
           </div>
         </div>
       </main>

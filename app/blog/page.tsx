@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { ArrowLeft, BookOpen, Calendar, Clock, Tag } from "lucide-react";
+import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/posts";
+
+export const metadata: Metadata = {
+  title: "博客文章",
+  description: "浏览 MyBlog 的技术文章、学习笔记与开发经验分享。",
+};
 
 export default function BlogPage() {
   const posts = getAllPosts();
